@@ -13,9 +13,9 @@ enum ModuleType {
 }
 
 enum QuestionType {
-    MCQ = 1;
-    MCQ_IMAGE = 2;
-    MATCH_THE_LABELS = 3;
-    MATCH_IAMGE_WITH_LABELS = 4;
-    TEXT_ANSWER = 5;
+    MCQ = 0;
+    MCQ_IMAGE = 1;
+    MATCH_THE_LABELS = 2;
+    MATCH_IAMGE_WITH_LABELS = 3;
+    TEXT_ANSWER = 4;
 }

@@ -19,9 +19,9 @@ service AssessmentQuestionService {
     rpc EditTextAnswer(EditTextAnswerRequest) returns (EditTextAnswerResponse) {};
     rpc GetTextAnswer(GetTextAnswerRequest) returns (GetTextAnswerResponse) {};
 
-    rpc CreateatchTheLabels(CreateatchTheLabelsRequest) returns (CreateatchTheLabelsResponse) {};
-    rpc EditatchTheLabels(EditatchTheLabelsRequest) returns (EditatchTheLabelsResponse) {};
-    rpc GetatchTheLabels(GetatchTheLabelsRequest) returns (GetatchTheLabelsResponse) {};
+    rpc CreateMatchTheLabels(CreateMatchTheLabelsRequest) returns (CreateMatchTheLabelsResponse) {};
+    rpc EditMatchTheLabels(EditMatchTheLabelsRequest) returns (EditMatchTheLabelsResponse) {};
+    rpc GetMatchTheLabels(GetMatchTheLabelsRequest) returns (GetMatchTheLabelsResponse) {};
 
     rpc CreateMatchImageWithLabels(CreateMatchImageWithLabelsRequest) returns (CreateMatchImageWithLabelsResponse) {};
     rpc EditMatchImageWithLabels(EditMatchImageWithLabelsRequest) returns (EditMatchImageWithLabelsResponse) {};
@@ -57,7 +57,7 @@ message EditMCQTextRequest {
     string ques_media = 3;
     int32 version = 4;
     string updated_by = 5;
-    repeated MCQTextOption options = 4;
+    repeated MCQTextOption options = 6;
 }
 
 message EditMCQTextResponse {
@@ -125,10 +125,10 @@ message EditMCQImageRequest {
     string ques_media = 3;
     int32 version = 4;
     string updated_by = 5;
-    repeated MCQImageOption options = 4;
+    repeated MCQImageOption options = 6;
 }
 
-message EditMCQTextResponse {
+message EditMCQImageResponse {
     string ques_id = 1;
     string ques_text = 2;
     string ques_media = 3;
@@ -271,7 +271,7 @@ message EditMatchTheLabelsRequest {
     string ques_media = 3;
     int32 version = 4;
     string updated_by = 5;
-    repeated MixMatchOption options = 4;
+    repeated MixMatchOption options = 6;
 }
 
 message EditMatchTheLabelsResponse {
@@ -313,8 +313,8 @@ message GetMatchTheLabelsResponse {
 }
 
 message MixMatchOption {
-    string ques;
-    string ans;
+    string ques = 1;
+    string ans = 2;
 }
 
 message CreateMatchImageWithLabelsRequest {
@@ -340,7 +340,7 @@ message EditMatchImageWithLabelsRequest {
     string ques_media = 3;
     int32 version = 4;
     string updated_by = 5;
-    repeated MixMatchOption options = 4;
+    repeated MixMatchOption options = 6;
 }
 
 message EditMatchImageWithLabelsResponse {
@@ -387,7 +387,7 @@ message ImageMixMatchOption {
 }
 
 message BulkPublishQuestionRequest {
-    repeated ques_ids = 1;
+    repeated string ques_ids = 1;
     string published_by = 2;
 }
 
@@ -413,5 +413,5 @@ message CloneQuestionResponse {
 
 message DeleteQuestionRequest {
     string ques_id = 1;
-    int version = 2;
+    int32 version = 2;
 }
