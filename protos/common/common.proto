@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.mindtickle.api.question_service.common;
+
+enum QuestionState {
+    DRAFT = 0;
+    PUBLISHED = 1;
+    NOT_FOUND = 3;
+}
+
+enum ModuleType {
+    Assessment = 0;
+}
+
+enum QuestionType {
+    MCQ = 1;
+    MCQ_IMAGE = 2;
+    MATCH_THE_LABELS = 3;
+    MATCH_IAMGE_WITH_LABELS = 4;
+    TEXT_ANSWER = 5;
+}

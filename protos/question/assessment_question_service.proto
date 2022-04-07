@@ -1,0 +1,417 @@
+syntax = "proto3";
+
+package com.mindtickle.api.question_service.assessment;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+service AssessmentQuestionService {
+    rpc CreateMCQText(CreateMCQTextRequest) returns (CreateMCQTextResponse) {};
+    rpc EditMCQText(EditMCQTextRequest) returns (EditMCQTextResponse) {};
+    rpc GetMCQText(GetMCQTextRequest) returns (GetMCQTextResponse) {};
+
+    rpc CreateMCQImage(CreateMCQImageRequest) returns (CreateMCQImageResponse) {};
+    rpc EditMCQImage(EditMCQImageRequest) returns (EditMCQImageResponse) {};
+    rpc GetMCQImage(GetMCQImageRequest) returns (GetMCQImageResponse) {};
+    
+    rpc CreateTextAnswer(CreateTextAnswerRequest) returns (CreateTextAnswerResponse) {};
+    rpc EditTextAnswer(EditTextAnswerRequest) returns (EditTextAnswerResponse) {};
+    rpc GetTextAnswer(GetTextAnswerRequest) returns (GetTextAnswerResponse) {};
+
+    rpc CreateatchTheLabels(CreateatchTheLabelsRequest) returns (CreateatchTheLabelsResponse) {};
+    rpc EditatchTheLabels(EditatchTheLabelsRequest) returns (EditatchTheLabelsResponse) {};
+    rpc GetatchTheLabels(GetatchTheLabelsRequest) returns (GetatchTheLabelsResponse) {};
+
+    rpc CreateMatchImageWithLabels(CreateMatchImageWithLabelsRequest) returns (CreateMatchImageWithLabelsResponse) {};
+    rpc EditMatchImageWithLabels(EditMatchImageWithLabelsRequest) returns (EditMatchImageWithLabelsResponse) {};
+    rpc GetMatchImageWithLabels(GetMatchImageWithLabelsRequest) returns (GetMatchImageWithLabelsResponse) {};
+    
+    rpc DeleteQuestion(DeleteQuestionRequest) returns (google.protobuf.Empty) {};
+
+    rpc BulkPublishQuestions(BulkPublishQuestionRequest) returns (BulkPublishQuestionResponse) {};
+
+    rpc CloneQuestion(CloneQuestionRequest) returns (CloneQuestionResponse) {};
+}
+
+message CreateMCQTextRequest {
+    string ques_text = 1;
+    string ques_media = 2;
+    string created_by = 3;
+    repeated MCQTextOption options = 4;
+}
+
+message CreateMCQTextResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+    repeated MCQTextOption options = 6;
+    QuestionState state = 8;
+}
+
+message EditMCQTextRequest {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    string updated_by = 5;
+    repeated MCQTextOption options = 4;
+}
+
+message EditMCQTextResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp last_updated_at = 6;
+    string created_by = 7;
+    string last_updated_by = 8;
+    repeated MCQTextOption options = 9;
+    QuestionState state = 10;
+}
+
+message GetMCQTextRequest {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message GetMCQTextResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    int32 sub_version = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp published_at = 7;
+    google.protobuf.Timestamp last_updated_at = 8;
+    string created_by = 9;
+    string published_by = 10;
+    string last_updated_by = 11;
+    string cloned_from = 12;
+    repeated MCQTextOption options = 13;
+    QuestionState state = 14;
+    ModuleType module_type= 15;
+    QuestionType ques_type = 16; 
+}
+
+message MCQTextOption {
+    string option = 1;
+    bool is_selected = 2;
+}
+
+message CreateMCQImageRequest {
+    string ques_text = 1;
+    string ques_media = 2;
+    string created_by = 3;
+    repeated MCQImageOption options = 4;
+}
+
+message CreateMCQImageResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+    repeated MCQImageOption options = 6;
+    QuestionState state = 8;
+}
+
+message EditMCQImageRequest {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    string updated_by = 5;
+    repeated MCQImageOption options = 4;
+}
+
+message EditMCQTextResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp last_updated_at = 6;
+    string created_by = 7;
+    string last_updated_by = 8;
+    repeated MCQImageOption options = 9;
+    QuestionState state = 10;
+}
+
+message GetMCQImageRequest {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message GetMCQImageResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    int32 sub_version = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp published_at = 7;
+    google.protobuf.Timestamp last_updated_at = 8;
+    string created_by = 9;
+    string published_by = 10;
+    string last_updated_by = 11;
+    string cloned_from = 12;
+    repeated MCQImageOption options = 13;
+    QuestionState state = 14;
+    ModuleType module_type= 15;
+    QuestionType ques_type = 16; 
+}
+
+message MCQImageOption {
+    string image_option = 1;
+    bool is_selected = 2;
+}
+
+message CreateTextAnswerRequest {
+    string ques_text = 1;
+    string ques_media = 2;
+    string created_by = 3;
+    string exact_answer = 4;
+    bool is_include_variant = 5;
+    repeated string variant_answers = 6;
+    int32 accuracy = 7;
+}
+
+message CreateTextAnswerResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+    string exact_answer = 6;
+    bool is_include_variant = 7;
+    repeated string variant_answers = 8;
+    int32 accuracy = 9;
+    QuestionState state = 10;
+}
+
+message EditTextAnswerRequest {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    string updated_by = 5;
+    string exact_answer = 6;
+    bool is_include_variant = 7;
+    repeated string variant_answers = 8;
+    int32 accuracy = 9;
+}
+
+message EditTextAnswerResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp last_updated_at = 6;
+    string created_by = 7;
+    string last_updated_by = 8;
+    string exact_answer = 9;
+    bool is_include_variant = 10;
+    repeated string variant_answers = 11;
+    int32 accuracy = 12;
+    QuestionState state = 13;
+}
+
+message GetTextAnswerRequest {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message GetTextAnswerResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    int32 sub_version = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp published_at = 7;
+    google.protobuf.Timestamp last_updated_at = 8;
+    string created_by = 9;
+    string published_by = 10;
+    string last_updated_by = 11;
+    string cloned_from = 12;
+    string exact_answer = 13;
+    bool is_include_variant = 14;
+    repeated string variant_answers = 15;
+    int32 accuracy = 16;
+    QuestionState state = 17;
+    ModuleType module_type= 18;
+    QuestionType ques_type = 19; 
+}
+
+message CreateMatchTheLabelsRequest {
+    string ques_text = 1;
+    string ques_media = 2;
+    string created_by = 3;
+    repeated MixMatchOption options = 4;
+}
+
+message CreateMatchTheLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+    repeated MixMatchOption options = 6;
+    QuestionState state = 8;
+}
+
+message EditMatchTheLabelsRequest {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    string updated_by = 5;
+    repeated MixMatchOption options = 4;
+}
+
+message EditMatchTheLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp last_updated_at = 6;
+    string created_by = 7;
+    string last_updated_by = 8;
+    repeated MixMatchOption options = 9;
+    QuestionState state = 10;
+}
+
+message GetMatchTheLabelsRequest {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message GetMatchTheLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    int32 sub_version = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp published_at = 7;
+    google.protobuf.Timestamp last_updated_at = 8;
+    string created_by = 9;
+    string published_by = 10;
+    string last_updated_by = 11;
+    string cloned_from = 12;
+    repeated MixMatchOption options = 13;
+    repeated int32 shuffle_list = 14;
+    QuestionState state = 15;
+    ModuleType module_type= 16;
+    QuestionType ques_type = 17; 
+}
+
+message MixMatchOption {
+    string ques;
+    string ans;
+}
+
+message CreateMatchImageWithLabelsRequest {
+    string ques_text = 1;
+    string ques_media = 2;
+    string created_by = 3;
+    repeated MixMatchOption options = 4;
+}
+
+message CreateMatchImageWithLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+    repeated ImageMixMatchOption options = 6;
+    QuestionState state = 8;
+}
+
+message EditMatchImageWithLabelsRequest {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    string updated_by = 5;
+    repeated MixMatchOption options = 4;
+}
+
+message EditMatchImageWithLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp last_updated_at = 6;
+    string created_by = 7;
+    string last_updated_by = 8;
+    repeated ImageMixMatchOption options = 9;
+    QuestionState state = 10;
+}
+
+message GetMatchImageWithLabelsRequest {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message GetMatchImageWithLabelsResponse {
+    string ques_id = 1;
+    string ques_text = 2;
+    string ques_media = 3;
+    int32 version = 4;
+    int32 sub_version = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp published_at = 7;
+    google.protobuf.Timestamp last_updated_at = 8;
+    string created_by = 9;
+    string published_by = 10;
+    string last_updated_by = 11;
+    string cloned_from = 12;
+    repeated ImageMixMatchOption options = 13;
+    repeated int32 shuffle_list = 14;
+    QuestionState state = 15;
+    ModuleType module_type= 16;
+    QuestionType ques_type = 17; 
+}
+
+message ImageMixMatchOption {
+    string image = 1;
+    string text = 2;
+}
+
+message BulkPublishQuestionRequest {
+    repeated ques_ids = 1;
+    string published_by = 2;
+}
+
+message BulkPublishQuestionResponse {
+    repeated PublishQuestionResponse responses = 1;
+}
+
+message PublishQuestionResponse {
+    string ques_id = 1;
+    QuestionState state = 2;
+}
+
+message CloneQuestionRequest {
+    string ques_id = 1;
+    int32 version = 2;
+    string cloned_by = 3;
+}
+
+message CloneQuestionResponse {
+    string ques_id = 1;
+    int32 version = 2;
+}
+
+message DeleteQuestionRequest {
+    string ques_id = 1;
+    int version = 2;
+}
